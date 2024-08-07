@@ -1,6 +1,6 @@
 type: edu
 files:
-  - name: src/tictactoe/Main.java
+  - name: src/tictactoe/main/Main.java
     visible: true
     text: |
       package tictactoe;
@@ -102,6 +102,21 @@ files:
           }
       }
     learner_created: false
-feedback_link: https://hyperskill.org/projects/81/stages/447/implement#comment
+  - name: src/tictactoe/io/input/UserInputManager.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/game/PlayGame.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/table/CreateTableArray.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/table/DisplayTable.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/coordinates/ValidateCoordinates.java
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/7434#comment
 status: Unchecked
 record: -1
