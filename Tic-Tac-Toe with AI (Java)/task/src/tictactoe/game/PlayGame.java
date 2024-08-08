@@ -1,7 +1,6 @@
 package tictactoe.game;
 
-import tictactoe.coordinates.ValidateCoordinates;
-import tictactoe.io.input.UserInputManager;
+import tictactoe.coordinates.UserCoordinatesHandler;
 import tictactoe.table.CreateTableArray;
 import tictactoe.table.DisplayTable;
 
@@ -18,8 +17,12 @@ public class PlayGame {
         char[][] table = CreateTableArray.createTableFromString(cells);
         DisplayTable.displayTable(table);
 
-        System.out.println("Enter the coordinates: ");
-        int[] coordinates = UserInputManager.getUserCoordinates();
+        int[] coordinates = UserCoordinatesHandler.promptUserCoordinates();
+
+
+
+
+
 
 
     }

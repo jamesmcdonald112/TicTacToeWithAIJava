@@ -117,6 +117,12 @@ files:
   - name: src/tictactoe/coordinates/ValidateCoordinates.java
     visible: true
     learner_created: true
+  - name: src/tictactoe/coordinates/UserCoordinatesHandler.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/parsing/InputParser.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7434#comment
 status: Unchecked
 record: -1
