@@ -2,7 +2,14 @@ package tictactoe.coordinates;
 
 public class ValidateCoordinates {
 
-
+    /**
+     * Validates the String provided to make sure it is valid coordinates. The length is checked
+     * first, then string is checked to make sure only numeric values are provided and finally
+     * the coordinates are parsed and checked to see if they are within the bounds of the game.
+     * @param coordinates
+     * @return
+     * @throws IllegalArgumentException
+     */
     public static boolean isValidCoordinates(String coordinates) throws IllegalArgumentException{
         String[] parts = coordinates.split(" ");
 

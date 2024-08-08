@@ -11,3 +11,9 @@ l
 <Tic-Tac-Toe with AI (Java)/task/src/tictactoe/main/Main.java,6/6/662908a0374c783d33e79958a159834cf907908b
 |
 LTic-Tac-Toe with AI (Java)/task/src/tictactoe/io/input/UserInputManager.java,2/8/28384a27f2a401d7ebcaee150e44283126d89357
+…
+UTic-Tac-Toe with AI (Java)/task/src/tictactoe/coordinates/UserCoordinatesHandler.java,b/4/b494be8aa1e144fac4c4fd37aebf61752d42032a
+{
+KTic-Tac-Toe with AI (Java)/task/src/tictactoe/player/AnalysePlayerTurn.java,d/1/d101e901b03a53725018481fd89410fc3eb3b3bb
+p
+@Tic-Tac-Toe with AI (Java)/task/src/tictactoe/player/Player.java,b/c/bc10d988504d5425f63a1b0e6084b2ad55dc482c

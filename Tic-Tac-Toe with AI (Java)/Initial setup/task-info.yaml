@@ -120,7 +120,16 @@ files:
   - name: src/tictactoe/coordinates/UserCoordinatesHandler.java
     visible: true
     learner_created: true
-  - name: src/tictactoe/parsing/InputParser.java
+  - name: src/tictactoe/player/Player.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/player/AnalysePlayerTurn.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/game/GameState.java
+    visible: true
+    learner_created: true
+  - name: src/tictactoe/game/AnalyseGameState.java
     visible: true
     learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7434#comment

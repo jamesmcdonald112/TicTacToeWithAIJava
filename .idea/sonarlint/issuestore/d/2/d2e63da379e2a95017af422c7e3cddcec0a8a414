@@ -1,8 +1,15 @@
 
-]	java:S125"<This block of commented-out lines of code should be removed.(‰ˆ·ùÿÿÿÿ8„æ’ø’2
-R
-java:S1481"0Remove this unused "coordinates" local variable.(ïüÌáúÿÿÿÿ8Ç˜£ø’2
-h
-java:S1128"FRemove this unused import 'tictactoe.coordinates.ValidateCoordinates'.(¶ãšÃıÿÿÿÿ8Ç˜£ø’2
+]	java:S125"<This block of commented-out lines of code should be removed.(‰ˆ·ùÿÿÿÿ8ô€ñ“2
 O
-java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8Ç˜£ø’2
+java:S1135"2Complete the task associated to this TODO comment.(Òœİë8ô€ñ“2
+X	java:S125"<This block of commented-out lines of code should be removed.(ô¢Õü8õ€ñ“2
+O
+java:S1135"2Complete the task associated to this TODO comment.(Òœİë8õ€ñ“2
+R
+java:S1481"0Remove this unused "coordinates" local variable.(€¾›¼şÿÿÿÿ8õ€ñ“2
+O
+java:S1481"2Remove this unused "currentPlayer" local variable.(İŠ¯Ò8ÖÁò“2
+k
+java:S1128"IRemove this unused import 'tictactoe.coordinates.UserCoordinatesHandler'.(çûÜ“şÿÿÿÿ8õ€ñ“2
+O
+java:S1128	"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8õ€ñ“2
