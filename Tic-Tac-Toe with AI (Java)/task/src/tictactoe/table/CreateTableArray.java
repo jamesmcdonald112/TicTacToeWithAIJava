@@ -29,4 +29,20 @@ public class CreateTableArray {
         }
         return table;
     }
+
+    /**
+     * Creates a 3 * 3 empty char matrix.
+     *
+     * @return The empty table as a char[][].
+     */
+    public static char[][] createEmptyTable() {
+        char[][] table = new char[3][3];
+
+        for (int row = 0; row < table.length; row++) {
+            for (int col = 0; col < table[row].length; col++) {
+                table[row][col] = ' ';
+            }
+        }
+        return table;
+    }
 }

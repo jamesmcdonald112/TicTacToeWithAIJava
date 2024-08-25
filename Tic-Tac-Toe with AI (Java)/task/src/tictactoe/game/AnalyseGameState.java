@@ -10,15 +10,18 @@ public class AnalyseGameState {
      *
      * @param table The table to be checked.
      */
-    public static void analyseGameState(char[][] table) {
+    public static boolean isGameFinished(char[][] table) {
         if (isWinner(table, Player.PLAYER_O)) {
             System.out.println(GameState.O_WINS.getMessage());
+            return true;
         } else if (isWinner(table, Player.PLAYER_X)) {
             System.out.println(GameState.X_WINS.getMessage());
+            return true;
         } else if (isDraw(table)) {
             System.out.println(GameState.DRAW.getMessage());
+            return true;
         } else {
-            System.out.println(GameState.GAME_NOT_FINISHED.getMessage());
+            return false;
         }
     }
 
