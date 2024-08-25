@@ -17,3 +17,7 @@ p
 @Tic-Tac-Toe with AI (Java)/task/src/tictactoe/player/Player.java,b/c/bc10d988504d5425f63a1b0e6084b2ad55dc482c
 {
 KTic-Tac-Toe with AI (Java)/task/src/tictactoe/player/AnalysePlayerTurn.java,d/1/d101e901b03a53725018481fd89410fc3eb3b3bb
+q
+ATic-Tac-Toe with AI (Java)/task/src/tictactoe/game/GameState.java,9/a/9aad5345a0905c1769256f7e1063d4abfc548da8
+x
+HTic-Tac-Toe with AI (Java)/task/src/tictactoe/game/AnalyseGameState.java,1/a/1a3d0840999490355ff129cfb23eaa1e7e60fd9b

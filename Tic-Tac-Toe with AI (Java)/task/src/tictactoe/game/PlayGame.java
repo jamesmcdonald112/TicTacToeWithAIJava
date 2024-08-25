@@ -1,7 +1,10 @@
 package tictactoe.game;
 
 import tictactoe.coordinates.UserCoordinatesHandler;
+import tictactoe.coordinates.ValidateCoordinates;
+import tictactoe.io.input.UserInputManager;
 import tictactoe.player.AnalysePlayerTurn;
+import tictactoe.player.MakeMove;
 import tictactoe.player.Player;
 import tictactoe.table.CreateTableArray;
 import tictactoe.table.DisplayTable;
@@ -13,24 +16,23 @@ public class PlayGame {
     public void startGame() {
         System.out.println("Enter the cells: ");
         // TODO: Use this in the final version
-//        String cells = UserInputManager.getUserInputString();
+        String cells = UserInputManager.getUserInputString();
 
         // Create the table from the input and display it in the console.
-        String cells = "_XXOOXOXX";
+//        String cells = "_XXOO_OX_";
         char[][] table = CreateTableArray.createTableFromString(cells);
         DisplayTable.displayTable(table);
-        // TODO: Use this in the final version
-//        int[] coordinates = UserCoordinatesHandler.promptUserCoordinates();
-
-        
-        int[] coordinates = {1, 1};
 
         Player currentPlayer = AnalysePlayerTurn.analysePlayerTurn(table);
-        boolean winnerO = AnalyseGameState.isWinner(table, Player.PLAYER_O);
-        boolean winnerX = AnalyseGameState.isWinner(table, Player.PLAYER_X);
 
-        System.out.println("X wins: " + winnerX);
-        System.out.println("O wins: " + winnerO);
+        // TODO: Use this in the final version
+        MakeMove.execute(table, currentPlayer);
+
+        DisplayTable.displayTable(table);
+
+        AnalyseGameState.analyseGameState(table);
+
+
 
     }
 }

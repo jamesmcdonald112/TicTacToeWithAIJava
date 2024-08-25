@@ -132,6 +132,12 @@ files:
   - name: src/tictactoe/game/AnalyseGameState.java
     visible: true
     learner_created: true
+  - name: src/tictactoe/player/MakeMove.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7434#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 25 Aug 2024 15:47:17 UTC"
 record: -1

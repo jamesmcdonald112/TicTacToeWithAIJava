@@ -4,9 +4,56 @@ import tictactoe.player.Player;
 
 public class AnalyseGameState {
 
-    public static boolean isWinner(char[][] table, Player player) {
+    /**
+     * The state of the game is analysed to see if there is a winner, draw or if the game is
+     * still in progress.
+     *
+     * @param table The table to be checked.
+     */
+    public static void analyseGameState(char[][] table) {
+        if (isWinner(table, Player.PLAYER_O)) {
+            System.out.println(GameState.O_WINS.getMessage());
+        } else if (isWinner(table, Player.PLAYER_X)) {
+            System.out.println(GameState.X_WINS.getMessage());
+        } else if (isDraw(table)) {
+            System.out.println(GameState.DRAW.getMessage());
+        } else {
+            System.out.println(GameState.GAME_NOT_FINISHED.getMessage());
+        }
+    }
+
+    /**
+     * Checks if the player has won the game by places three of their own symbols in a row
+     * vertical, horizontally, or diagonally.
+     *
+     * @param table  The table to be checked.
+     * @param player The player to match three in a row.
+     * @return True if the player has won; false otherwise.
+     */
+    private static boolean isWinner(char[][] table, Player player) {
         char symbol = player.getSymbol();
         return isWinnerRow(table, symbol) || isWinnerCol(table, symbol) || isWinnerDiagonally(table, symbol);
+    }
+
+    /**
+     * Checks the state of the table to see if it is a draw.
+     *
+     * @param table The table to be checked.
+     * @return True if it is a draw; false otherwise.
+     */
+    private static boolean isDraw(char[][] table) {
+        int count = 0;
+        for (int row = 0; row < table.length; row++) {
+            for (int col = 0; col < table[row].length; col++) {
+                if (table[row][col] == Player.PLAYER_X.getSymbol() || table[row][col] == Player.PLAYER_O.getSymbol()) {
+                    count++;
+                }
+            }
+        }
+        boolean playerXWins = isWinner(table, Player.PLAYER_X);
+        boolean playerOWins = isWinner(table, Player.PLAYER_O);
+
+        return !playerXWins && !playerOWins && (count == 9);
     }
 
     /**
@@ -82,7 +129,6 @@ public class AnalyseGameState {
                 symbolCount++;
             }
         }
-
 
         return symbolCount == 3;
     }

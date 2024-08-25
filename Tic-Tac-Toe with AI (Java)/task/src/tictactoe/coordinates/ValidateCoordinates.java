@@ -15,15 +15,14 @@ public class ValidateCoordinates {
 
         // Is the correct length
         if (!isCorrectLength(parts)) {
-            throw new IllegalArgumentException("Error! Coordinates must be two numbers");
+            throw new IllegalArgumentException("You should enter numbers!");
         }
 
         // Check if the coordinates are numeric and parse them
         int[] intCoordinates = new int[parts.length];
         for (int i = 0; i < parts.length; i++) {
             if (!isNumeric(parts[i])) {
-                throw new IllegalArgumentException("Error! Numbers must be provided as " +
-                        "coordinates");
+                throw new IllegalArgumentException("You should enter numbers!");
             } else {
                 intCoordinates[i] = Integer.parseInt(parts[i]);
             }
@@ -31,11 +30,23 @@ public class ValidateCoordinates {
 
         // Is within bounds of the table
         if (!isWithinBounds(intCoordinates)) {
-            throw new IllegalArgumentException("Error! Must be within bounds of the game.");
+            throw new IllegalArgumentException("Coordinates should be from 1 to 3!");
         }
 
         // Passes all validation
         return true;
+    }
+
+    /**
+     * Checks the table to see if there is a symbol at the chosen coordinates.
+     *
+     * @param coordinates The coordinates to check
+     * @param table The table to check
+     * @return True of it is occupied; false otherwise.
+     */
+    public static boolean isOccupied(int[] coordinates, char[][] table) {
+        char symbol = table[coordinates[0] - 1][coordinates[1] - 1]; // Minus one for zero index
+        return (symbol == 'X' || symbol == 'O');
     }
 
     /**
