@@ -1,0 +1,8 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(«±âË8‹¤ãı˜2
+L
+java:S1172"0Remove this unused method parameter "userInput".(ØàÍR8„¨äı˜2
+C
+java:S1168"&Return an empty array instead of null.(¥¹ï8…Ûäı˜2
+N
+java:S1481%"1Remove this unused "gameSettings" local variable.(ÓÈÆŸ8•¤ãı˜2

@@ -23,3 +23,15 @@ x
 HTic-Tac-Toe with AI (Java)/task/src/tictactoe/game/AnalyseGameState.java,1/a/1a3d0840999490355ff129cfb23eaa1e7e60fd9b
 r
 BTic-Tac-Toe with AI (Java)/task/src/tictactoe/player/MakeMove.java,0/5/0557d887bdbbe8633dd6f7bb496e52644b5d896e
+l
+<Tic-Tac-Toe with AI (Java)/task/src/tictactoe/menu/Menu.java,3/f/3f1e520c8a0ce2cdaefc12344add81f4423932da
+p
+@Tic-Tac-Toe with AI (Java)/task/src/tictactoe/menu/MainMenu.java,7/1/71e8e2f5db7e1e1281bc52e1246d368f7cd58843
+w
+GTic-Tac-Toe with AI (Java)/task/src/tictactoe/gameSettings/Command.java,8/b/8b0fce46d27a069a38668fc7f603daa606ad5360
+t
+DTic-Tac-Toe with AI (Java)/task/src/tictactoe/player/PlayerType.java,8/c/8cf2111ee6896e8cd75b138dbcf23bb410fbb686
+|
+LTic-Tac-Toe with AI (Java)/task/src/tictactoe/gameSettings/GameSettings.java,8/f/8fa81ceccb45be8ecb6e995b13a92554036b9324
+„
+TTic-Tac-Toe with AI (Java)/task/src/tictactoe/gameSettings/ValidateGameSettings.java,4/f/4f4f1f3a8e1300d65314efebcce8120d1716cf0d
