@@ -8,13 +8,29 @@ import java.util.Random;
 public class MakeMove {
 
     /**
-     * The current player is prompted for valid coordinates and the player's symbol is entered at
+     * Executes a move based on the player type
+     *
+     * @param table         The game board
+     * @param currentPlayer The player making the move.
+     */
+    public static void executeMove(char[][] table, Player currentPlayer) {
+        if (currentPlayer.isHuman()) {
+            executeHumanMove(table, currentPlayer);
+        } else {
+            // Print the message for the AI's difficulty level
+            System.out.println("Making move level \"" + currentPlayer.getDifficultyLevel().name().toLowerCase() + "\"");
+            executeRandomMove(table, currentPlayer);
+        }
+    }
+
+    /**
+     * The human player is prompted for valid coordinates and the player's symbol is entered at
      * the selected coordinates.
      *
      * @param table         The table to place to symbol in.
      * @param currentPlayer The current player making the move.
      */
-    public static void execute(char[][] table, Player currentPlayer) {
+    private static void executeHumanMove(char[][] table, Player currentPlayer) {
         boolean validMove = false;
         while (!validMove) {
             int[] coordinates = UserCoordinatesHandler.promptUserCoordinates();
@@ -33,7 +49,7 @@ public class MakeMove {
      * @param table         The table for the symbol to be placed on.
      * @param currentPlayer The current player
      */
-    public static void executeRandomMove(char[][] table, Player currentPlayer) {
+    private static void executeRandomMove(char[][] table, Player currentPlayer) {
         Random random = new Random();
         boolean validMove = false;
         while (!validMove) {

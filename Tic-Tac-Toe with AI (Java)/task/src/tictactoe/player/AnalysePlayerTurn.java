@@ -9,20 +9,20 @@ public class AnalysePlayerTurn {
      * @param table   The table to be analysed
      * @return Return the player with the next turn.
      */
-    public static Player analysePlayerTurn(char[][] table) {
+    public static Player analysePlayerTurn(char[][] table, Player playerX, Player playerO) {
         int playerXCount = 0;
         int playerOCount = 0;
 
         for (int row = 0; row < table.length; row++) {
             for (int col = 0; col < table[row].length; col++) {
-                if (table[row][col] == Player.PLAYER_X.getSymbol()) {
+                if (table[row][col] == playerX.getSymbol()) {
                     playerXCount++;
-                } else if (table[row][col] == Player.PLAYER_O.getSymbol()) {
+                } else if (table[row][col] == playerO.getSymbol()) {
                     playerOCount++;
                 }
             }
         }
 
-        return (playerXCount <= playerOCount) ? Player.PLAYER_X : Player.PLAYER_O;
+        return (playerXCount <= playerOCount) ? playerX: playerO;
     }
 }

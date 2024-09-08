@@ -812,7 +812,7 @@ files:
       
       }
     learner_created: true
-  - name: src/tictactoe/game/PlayGame.java
+  - name: src/tictactoe/game/TicTacToeGame.java
     visible: true
     text: |
       package tictactoe.game;
@@ -874,9 +874,12 @@ files:
   - name: src/tictactoe/player/PlayerType.java
     visible: true
     learner_created: true
+  - name: src/tictactoe/player/DifficultyLevel.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7436#comment
 status: Solved
 feedback:
   message: Congratulations!
-  time: "Sun, 08 Sep 2024 14:50:47 UTC"
+  time: "Sun, 08 Sep 2024 16:18:13 UTC"
 record: -1

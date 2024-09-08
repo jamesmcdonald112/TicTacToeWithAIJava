@@ -1,5 +1,6 @@
 package tictactoe.gameSettings;
 
+import tictactoe.player.DifficultyLevel;
 import tictactoe.player.PlayerType;
 
 public class ValidateGameSettings {
@@ -75,8 +76,10 @@ public class ValidateGameSettings {
      * @return True if it is a valid player type; false otherwise.
      */
     private static boolean isValidPlayerType(String playerType) {
-        return playerType.equalsIgnoreCase(PlayerType.EASY.name())
-                || playerType.equalsIgnoreCase(PlayerType.USER.name());
+        return playerType.equalsIgnoreCase(PlayerType.USER.name())
+                || playerType.equalsIgnoreCase(DifficultyLevel.EASY.name())
+                || playerType.equalsIgnoreCase(DifficultyLevel.MEDIUM.name())
+                || playerType.equalsIgnoreCase(DifficultyLevel.HARD.name());
     }
 
 

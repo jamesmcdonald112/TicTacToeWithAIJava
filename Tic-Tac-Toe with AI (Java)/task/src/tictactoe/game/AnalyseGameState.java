@@ -10,14 +10,14 @@ public class AnalyseGameState {
      *
      * @param table The table to be checked.
      */
-    public static boolean isGameFinished(char[][] table) {
-        if (isWinner(table, Player.PLAYER_O)) {
+    public static boolean isGameFinished(char[][] table, Player playerX, Player playerO) {
+        if (isWinner(table, playerO)) {
             System.out.println(GameState.O_WINS.getMessage());
             return true;
-        } else if (isWinner(table, Player.PLAYER_X)) {
+        } else if (isWinner(table, playerX)) {
             System.out.println(GameState.X_WINS.getMessage());
             return true;
-        } else if (isDraw(table)) {
+        } else if (isDraw(table, playerX, playerO)) {
             System.out.println(GameState.DRAW.getMessage());
             return true;
         } else {
@@ -44,17 +44,17 @@ public class AnalyseGameState {
      * @param table The table to be checked.
      * @return True if it is a draw; false otherwise.
      */
-    private static boolean isDraw(char[][] table) {
+    private static boolean isDraw(char[][] table, Player playerX, Player playerO) {
         int count = 0;
         for (int row = 0; row < table.length; row++) {
             for (int col = 0; col < table[row].length; col++) {
-                if (table[row][col] == Player.PLAYER_X.getSymbol() || table[row][col] == Player.PLAYER_O.getSymbol()) {
+                if (table[row][col] == playerX.getSymbol() || table[row][col] == playerO.getSymbol()) {
                     count++;
                 }
             }
         }
-        boolean playerXWins = isWinner(table, Player.PLAYER_X);
-        boolean playerOWins = isWinner(table, Player.PLAYER_O);
+        boolean playerXWins = isWinner(table, playerX);
+        boolean playerOWins = isWinner(table, playerO);
 
         return !playerXWins && !playerOWins && (count == 9);
     }
