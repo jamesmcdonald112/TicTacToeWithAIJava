@@ -79,8 +79,9 @@ public class TicTacToeGame {
 
             // Analyse the players turn based on the state of the game.
             Player currentPlayer = AnalysePlayerTurn.analysePlayerTurn(table, playerX, playerO);
+            Player opponent = currentPlayer == playerX ? playerO : playerX;
 
-            MakeMove.executeMove(table, currentPlayer);
+            MakeMove.executeMove(table, currentPlayer, opponent);
 
             // Display the updated table.
             DisplayTable.displayTable(table);

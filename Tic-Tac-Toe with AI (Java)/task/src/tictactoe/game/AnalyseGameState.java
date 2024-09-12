@@ -25,6 +25,8 @@ public class AnalyseGameState {
         }
     }
 
+
+
     /**
      * Checks if the player has won the game by places three of their own symbols in a row
      * vertical, horizontally, or diagonally.
@@ -33,7 +35,7 @@ public class AnalyseGameState {
      * @param player The player to match three in a row.
      * @return True if the player has won; false otherwise.
      */
-    private static boolean isWinner(char[][] table, Player player) {
+    public static boolean isWinner(char[][] table, Player player) {
         char symbol = player.getSymbol();
         return isWinnerRow(table, symbol) || isWinnerCol(table, symbol) || isWinnerDiagonally(table, symbol);
     }

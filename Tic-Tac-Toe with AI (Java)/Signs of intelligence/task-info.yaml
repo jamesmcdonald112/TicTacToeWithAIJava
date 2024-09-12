@@ -1,16 +1,5 @@
 type: edu
 files:
-  - name: src/tictactoe/Main.java
-    visible: true
-    text: |
-      package tictactoe;
-      
-      public class Main {
-          public static void main(String[] args) {
-              // write your code here
-          }
-      }
-    learner_created: false
   - name: test/TicTacToeTest.java
     visible: false
     text: |
@@ -330,6 +319,977 @@ files:
           }
       }
     learner_created: false
+  - name: src/tictactoe/gameSettings/ValidateGameSettings.java
+    visible: true
+    text: |
+      package tictactoe.gameSettings;
+      
+      import tictactoe.player.DifficultyLevel;
+      import tictactoe.player.PlayerType;
+      
+      public class ValidateGameSettings {
+      
+          /**
+           * Validates the settings by making sure they are not null or empty, and that the setting are
+           * valid.
+           *
+           * @param userInput The input to be validated.
+           * @return True if they are valid, false otherwise;
+           */
+          public static boolean isValidSettings(String userInput) {
+              // Check if the input is null or empty
+              if (isNullOrEmpty(userInput)) {
+                  System.out.println("Input cannot be null or empty");
+                  return false;
+              }
+      
+              String[] parts = userInput.trim().split(" ");
+      
+              // Check if the user has entered the exit command
+              if (isExitCommand(parts)) {
+                  return true;
+              }
+      
+              // Check if the commands are valid or starting the game.
+              if (isValidStartCommand(parts)) {
+                  return true;
+              }
+      
+              // Return false otherwise.
+              return false;
+          }
+      
+          /**
+           * Checks if the user input is null or empty
+           *
+           * @param userInput The input to be checked.
+           * @return True if the input is null or empty; flase otherwise.
+           */
+          private static boolean isNullOrEmpty(String userInput) {
+              return userInput == null || userInput.trim().isEmpty();
+          }
+      
+          /**
+           * Validates that the exit command is entered correctly.
+           *
+           * @param parts The user input for the settings seperated into String parts.
+           * @return True if the exit input is valid; false otherwise.
+           */
+          private static boolean isExitCommand(String[] parts) {
+              return parts.length == 1 && parts[0].equalsIgnoreCase(Command.EXIT.name());
+          }
+      
+          /**
+           * Checks if the command is a valid start command.
+           *
+           * @param parts The input the user entered for the settings.
+           * @return True if it is a valid start input; false otherwise.
+           * @return
+           */
+          private static boolean isValidStartCommand(String[] parts) {
+              return parts.length == 3
+                      && parts[0].equalsIgnoreCase(Command.START.name())
+                      && isValidPlayerType(parts[1])
+                      && isValidPlayerType(parts[2]);
+          }
+      
+          /**
+           * Checks if the player type is a valid player type.
+           *
+           * @param playerType The input the user selected as a player type to be validated.
+           * @return True if it is a valid player type; false otherwise.
+           */
+          private static boolean isValidPlayerType(String playerType) {
+              return playerType.equalsIgnoreCase(PlayerType.USER.name())
+                      || playerType.equalsIgnoreCase(DifficultyLevel.EASY.name())
+                      || playerType.equalsIgnoreCase(DifficultyLevel.MEDIUM.name())
+                      || playerType.equalsIgnoreCase(DifficultyLevel.HARD.name());
+          }
+      
+      
+      }
+    learner_created: true
+  - name: src/tictactoe/table/CreateTableArray.java
+    visible: true
+    text: |
+      package tictactoe.table;
+      
+      public class CreateTableArray {
+      
+          /**
+           * Creates a 3 * 3 char matrix from a string input.
+           *
+           * @param cells The cells to enter each cell of the char[][]
+           * @return The table as a char[][].
+           */
+          public static char[][] createTableFromString(String cells) {
+              char[][] table = new char[3][3];
+      
+              // Keep track of the index for the cell String
+              int cellIndex = 0;
+              for (int row = 0; row < table.length; row++) {
+                  for (int col = 0; col < table[row].length; col++) {
+                      // Assign each character of the string to the table
+                      char currentChar = cells.charAt(cellIndex);
+      
+                      // Replace underscores with blank spaces.
+                      if (currentChar == '_') {
+                          table[row][col] = ' ';
+                      } else {
+                          table[row][col] = cells.charAt(cellIndex);
+                      }
+                      cellIndex++;
+                  }
+              }
+              return table;
+          }
+      
+          /**
+           * Creates a 3 * 3 empty char matrix.
+           *
+           * @return The empty table as a char[][].
+           */
+          public static char[][] createEmptyTable() {
+              char[][] table = new char[3][3];
+      
+              for (int row = 0; row < table.length; row++) {
+                  for (int col = 0; col < table[row].length; col++) {
+                      table[row][col] = ' ';
+                  }
+              }
+              return table;
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/menu/Menu.java
+    visible: true
+    text: |
+      package tictactoe.menu;
+      
+      public interface Menu {
+      
+          void run();
+      }
+    learner_created: true
+  - name: src/tictactoe/table/DisplayTable.java
+    visible: true
+    text: |
+      package tictactoe.table;
+      
+      public class DisplayTable {
+      
+          /**
+           * Formats and displays the formatted table to the console
+           *
+           * @param table The table to be formatted and displayed
+           */
+          public static void displayTable(char[][] table) {
+              String formattedTable = createFormattedTable(table);
+              System.out.println(formattedTable);
+      
+          }
+      
+          /**
+           * Creates a formatted table and returns it as a String.
+           *
+           * @param table The table to be formatted
+           * @return The formatted table as a string.
+           */
+          private static String createFormattedTable(char[][] table) {
+              StringBuilder formattedTable = new StringBuilder();
+      
+              // Append dashes to the top
+              formattedTable.append(dashes());
+      
+              // Append each row with proper formatting
+              for (int row = 0; row < table.length; row++) {
+                  formattedTable.append(formatRow(table[row]));
+              }
+      
+              // Append dashes to the bottom
+              formattedTable.append(dashes());
+      
+              return formattedTable.toString();
+          }
+      
+          /**
+           * Returns a string of '-'s
+           *
+           * @return Return '-'s as a string
+           */
+          private static String dashes() {
+              return "---------\n";
+          }
+      
+      
+          /**
+           * Formats a single row of the table for display
+           *
+           * @param row The row to be formatted.
+           * @return The formatted row as a string.
+           */
+          private static String formatRow(char[] row) {
+              StringBuilder formattedRow = new StringBuilder("| ");
+      
+              for (char cell : row) {
+                  formattedRow.append(cell).append(" ");
+              }
+              // Append a pipe at the end;
+              formattedRow.append("|\n");
+              return formattedRow.toString();
+          }
+      
+      
+      }
+    learner_created: true
+  - name: src/tictactoe/coordinates/UserCoordinatesHandler.java
+    visible: true
+    text: |
+      package tictactoe.coordinates;
+      
+      import tictactoe.io.input.UserInputManager;
+      
+      import java.util.InputMismatchException;
+      
+      public class UserCoordinatesHandler {
+      
+          /**
+           * Handles the logic for prompting the user for the coordinates, validating and parsing the
+           * coordinates.
+           *
+           * @return Valid coordinates as an int array.
+           * @throws IllegalArgumentException If the input is invalid.
+           */
+          public static int[] promptUserCoordinates() {
+              boolean isValidCoordinates = false;
+              int[] coordinates = null;
+      
+              while (!isValidCoordinates) {
+                  System.out.println("Enter the coordinates: ");
+                  String userInput = UserInputManager.getUserInputString();
+                  try {
+                      coordinates = parseCoordinates(userInput);
+                      isValidCoordinates = true; // If no exception is thrown, the coordinates are valid
+                  } catch (IllegalArgumentException e) {
+                      System.out.println(e.getMessage());
+                  }
+              }
+              return coordinates;
+          }
+      
+          /**
+           * Validates the input and parses it into an int array.
+           *
+           * @param input The input to be validated and parsed as ints.
+           * @return An int array.
+           * @throws IllegalArgumentException If the input is invalid.
+           */
+          private static int[] parseCoordinates(String input) throws InputMismatchException {
+              ValidateCoordinates.isValidCoordinates(input);
+              String[] parts = input.split(" ");
+              int[] coordinates = new int[2];
+              coordinates[0] = Integer.parseInt(parts[0]);
+              coordinates[1] = Integer.parseInt(parts[1]);
+              return coordinates;
+          }
+      
+      }
+    learner_created: true
+  - name: src/tictactoe/main/Main.java
+    visible: true
+    text: |
+      package tictactoe.main;
+      
+      import tictactoe.game.TicTacToeGame;
+      
+      /**
+       * Main class to start the Tic-Tac-Toe game.
+       */
+      public class Main {
+      
+          /**
+           * The entry point of the application.
+           * It initiates the game by creating an instance of PlayGame.
+           *
+           * @param args Command-line arguments (not used).
+           */
+          public static void main(String[] args) {
+              // write your code here
+              TicTacToeGame ticTacToeGame = new TicTacToeGame();
+              ticTacToeGame.startGame();
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/game/AnalyseGameState.java
+    visible: true
+    text: |
+      package tictactoe.game;
+      
+      import tictactoe.player.Player;
+      
+      public class AnalyseGameState {
+      
+          /**
+           * The state of the game is analysed to see if there is a winner, draw or if the game is
+           * still in progress.
+           *
+           * @param table The table to be checked.
+           */
+          public static boolean isGameFinished(char[][] table, Player playerX, Player playerO) {
+              if (isWinner(table, playerO)) {
+                  System.out.println(GameState.O_WINS.getMessage());
+                  return true;
+              } else if (isWinner(table, playerX)) {
+                  System.out.println(GameState.X_WINS.getMessage());
+                  return true;
+              } else if (isDraw(table, playerX, playerO)) {
+                  System.out.println(GameState.DRAW.getMessage());
+                  return true;
+              } else {
+                  return false;
+              }
+          }
+      
+          /**
+           * Checks if the player has won the game by places three of their own symbols in a row
+           * vertical, horizontally, or diagonally.
+           *
+           * @param table  The table to be checked.
+           * @param player The player to match three in a row.
+           * @return True if the player has won; false otherwise.
+           */
+          private static boolean isWinner(char[][] table, Player player) {
+              char symbol = player.getSymbol();
+              return isWinnerRow(table, symbol) || isWinnerCol(table, symbol) || isWinnerDiagonally(table, symbol);
+          }
+      
+          /**
+           * Checks the state of the table to see if it is a draw.
+           *
+           * @param table The table to be checked.
+           * @return True if it is a draw; false otherwise.
+           */
+          private static boolean isDraw(char[][] table, Player playerX, Player playerO) {
+              int count = 0;
+              for (int row = 0; row < table.length; row++) {
+                  for (int col = 0; col < table[row].length; col++) {
+                      if (table[row][col] == playerX.getSymbol() || table[row][col] == playerO.getSymbol()) {
+                          count++;
+                      }
+                  }
+              }
+              boolean playerXWins = isWinner(table, playerX);
+              boolean playerOWins = isWinner(table, playerO);
+      
+              return !playerXWins && !playerOWins && (count == 9);
+          }
+      
+          /**
+           * Checks if the rows have three matching symbols
+           *
+           * @param table  The table to be checked
+           * @param symbol The symbol to match
+           * @return True if a row contains 3 matching symbols; false otherwise
+           */
+          private static boolean isWinnerRow(char[][] table, char symbol) {
+              for (int row = 0; row < table.length; row++) {
+                  int symbolCount = 0;
+                  for (int col = 0; col < table[row].length; col++) {
+                      if (table[row][col] == symbol) {
+                          symbolCount++;
+                      }
+                  }
+                  if (symbolCount == 3) {
+                      return true; // Found a row with three symbols
+                  }
+              }
+      
+              return false; // No row has three symbols
+          }
+      
+          /**
+           * Checks the columns for three matching symbols.
+           *
+           * @param table  The table to be checked.
+           * @param symbol The symbol to be matched.
+           * @return True if three matching symbols are found in a column; false otherwise
+           */
+          private static boolean isWinnerCol(char[][] table, char symbol) {
+              for (int col = 0; col < table[0].length; col++) {
+                  int symbolCount = 0;
+                  for (int row = 0; row < table.length; row++) {
+                      if (table[row][col] == symbol) {
+                          symbolCount++;
+                      }
+                  }
+                  if (symbolCount == 3) {
+                      return true;
+                  }
+              }
+              return false;
+          }
+      
+          /**
+           * Checks if there is a matching symbol both diagonal directions.
+           *
+           * @param table  The table to be checked
+           * @param symbol The symbol to check
+           * @return True if there are three matching symbols diagonally; false otherwise.
+           */
+          private static boolean isWinnerDiagonally(char[][] table, char symbol) {
+              // Checks from top left (0,0) to bottom right (2,2) of the table
+              int symbolCount = 0;
+              for (int i = 0; i < table.length; i++) {
+                  if (table[i][i] == symbol) {
+                      symbolCount++;
+                  }
+              }
+              // Return true if the symbols match three in a row.
+              if (symbolCount == 3) {
+                  return true;
+              }
+      
+              symbolCount = 0;
+              // Checks from bottom left (2,0) to top right (0,2) of the table
+              for (int row = 0; row < table.length; row++) {
+                  int col = table.length - 1 - row;
+                  if (table[row][col] == symbol) {
+                      symbolCount++;
+                  }
+              }
+      
+              return symbolCount == 3;
+          }
+      
+      }
+    learner_created: true
+  - name: src/tictactoe/game/TicTacToeGame.java
+    visible: true
+    text: |
+      package tictactoe.game;
+      
+      import tictactoe.gameSettings.GameSettings;
+      import tictactoe.player.*;
+      import tictactoe.table.CreateTableArray;
+      import tictactoe.table.DisplayTable;
+      
+      public class TicTacToeGame {
+      
+          /**
+           * Starts the Tic-Tac-Toe game. It loops until the user chooses to exit the game.
+           * The method prompts for game settings, initialises the board, and begins the game loop.
+           */
+          public void startGame() {
+              boolean isGameRunning = true;
+              while (isGameRunning) {
+                  // Prompt user for the game settings
+                  GameSettings gameSettings = new GameSettings();
+      
+                  // Check if the user requested to exit the game
+                  if (gameSettings.isExitCommand()) {
+                      isGameRunning = false;
+                      System.out.println("Exiting the game...");
+                  } else {
+                      // Initialise player setting and game board
+                      Player[] players = initialisePlayerSettings(gameSettings);
+                      char[][] table = CreateTableArray.createEmptyTable();
+                      runGame(table, players);
+                  }
+              }
+      
+          }
+      
+          /**
+           * Initialises the player settings (human or AI)
+           *
+           * @param gameSettings The GameSettings object containing the game settings
+           * @return A string array with the player types for Player X and Player O
+           */
+          private Player[] initialisePlayerSettings(GameSettings gameSettings) {
+              String[] settings = gameSettings.getSettings();
+      
+             // Create player X
+              Player playerX = settings[1].equalsIgnoreCase("user")
+                      ? new Player('X', PlayerType.USER)
+                      : new Player('X', getDifficultyLevel(settings[1]));
+      
+              // Create Player O
+              Player playerO = settings[2].equalsIgnoreCase("user")
+                      ? new Player('O', PlayerType.USER)
+                      : new Player('O', getDifficultyLevel(settings[2]));
+      
+              return new Player[]{playerX, playerO};
+          }
+      
+          private DifficultyLevel getDifficultyLevel(String input) {
+              switch (input.toLowerCase()) {
+                  case "easy" :
+                      return DifficultyLevel.EASY;
+                  case "medium" :
+                      return DifficultyLevel.MEDIUM;
+                  case "hard" :
+                      return DifficultyLevel.HARD;
+                  default:
+                      throw new IllegalArgumentException("Invalid difficulty level: " + input);
+              }
+          }
+      
+          private static void runGame(char[][] table, Player[] players) {
+              Player playerX = players[0];
+              Player playerO = players[1];
+      
+              // Display the table
+              DisplayTable.displayTable(table);
+      
+              // Flag to loop the game.
+              boolean running = true;
+              while (running) {
+      
+                  // Analyse the players turn based on the state of the game.
+                  Player currentPlayer = AnalysePlayerTurn.analysePlayerTurn(table, playerX, playerO);
+      
+                  MakeMove.executeMove(table, currentPlayer);
+      
+                  // Display the updated table.
+                  DisplayTable.displayTable(table);
+      
+                  // Check to see if the game is finsihed.
+                  if (AnalyseGameState.isGameFinished(table, playerX, playerO)) {
+                      running = false;
+                  }
+              }
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/player/Player.java
+    visible: true
+    text: |-
+      package tictactoe.player;
+      
+      public class Player {
+      
+          private char symbol; // 'X' or 'O'
+          private PlayerType playerType; // USER or COMPUTER
+          private DifficultyLevel difficultyLevel; // Can be null for USER
+      
+          // Constructor for human players
+          public Player(char symbol, PlayerType playerType) {
+              this.symbol = symbol;
+              this.playerType = playerType;
+              this.difficultyLevel = null;
+          }
+      
+          // Constructor for AI players
+          public Player(char symbol, DifficultyLevel difficultyLevel) {
+              this.symbol = symbol;
+              this.playerType = PlayerType.COMPUTER; // Computer player type
+              this.difficultyLevel = difficultyLevel; // Set difficulty level
+          }
+      
+          public char getSymbol() {
+              return symbol;
+          }
+      
+          public PlayerType getPlayerType() {
+              return playerType;
+          }
+      
+          public DifficultyLevel getDifficultyLevel() {
+              return difficultyLevel;
+          }
+      
+          public boolean isHuman() {
+              return playerType == PlayerType.USER;
+          }
+      
+          public boolean isComputer() {
+              return playerType == PlayerType.COMPUTER;
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/player/MakeMove.java
+    visible: true
+    text: |
+      package tictactoe.player;
+      
+      import tictactoe.coordinates.UserCoordinatesHandler;
+      import tictactoe.coordinates.ValidateCoordinates;
+      
+      import java.util.Random;
+      
+      public class MakeMove {
+      
+          /**
+           * Executes a move based on the player type
+           *
+           * @param table         The game board
+           * @param currentPlayer The player making the move.
+           */
+          public static void executeMove(char[][] table, Player currentPlayer) {
+              if (currentPlayer.isHuman()) {
+                  executeHumanMove(table, currentPlayer);
+              } else {
+                  // Print the message for the AI's difficulty level
+                  System.out.println("Making move level \"" + currentPlayer.getDifficultyLevel().name().toLowerCase() + "\"");
+                  executeRandomMove(table, currentPlayer);
+              }
+          }
+      
+          /**
+           * The human player is prompted for valid coordinates and the player's symbol is entered at
+           * the selected coordinates.
+           *
+           * @param table         The table to place to symbol in.
+           * @param currentPlayer The current player making the move.
+           */
+          private static void executeHumanMove(char[][] table, Player currentPlayer) {
+              boolean validMove = false;
+              while (!validMove) {
+                  int[] coordinates = UserCoordinatesHandler.promptUserCoordinates();
+                  if (ValidateCoordinates.isOccupied(coordinates, table)) {
+                      System.out.println("This cell is occupied! Choose another one!");
+                  } else {
+                      table[coordinates[0] - 1][coordinates[1] - 1] = currentPlayer.getSymbol();
+                      validMove = true;
+                  }
+              }
+          }
+      
+          /**
+           * A valid move is made randomly for the players turn.
+           *
+           * @param table         The table for the symbol to be placed on.
+           * @param currentPlayer The current player
+           */
+          private static void executeRandomMove(char[][] table, Player currentPlayer) {
+              Random random = new Random();
+              boolean validMove = false;
+              while (!validMove) {
+                  int row = random.nextInt(1, 4);
+                  int col = random.nextInt(1, 4);
+                  int[] coordinates = new int[]{row, col};
+                  if (!ValidateCoordinates.isOccupied(coordinates, table)) {
+                      table[coordinates[0] - 1][coordinates[1] - 1] = currentPlayer.getSymbol();
+                      validMove = true;
+                  }
+              }
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/player/DifficultyLevel.java
+    visible: true
+    text: |
+      package tictactoe.player;
+      
+      public enum DifficultyLevel {
+          EASY, MEDIUM, HARD;
+      }
+    learner_created: true
+  - name: src/tictactoe/game/GameState.java
+    visible: true
+    text: |
+      package tictactoe.game;
+      
+      public enum GameState {
+          GAME_NOT_FINISHED("Game not finished"),
+          DRAW("Draw"),
+          X_WINS("X wins"),
+          O_WINS("O wins");
+      
+          private final String message;
+      
+          GameState(String message) {
+              this.message = message;
+          }
+      
+          public String getMessage() {
+              return message;
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/coordinates/ValidateCoordinates.java
+    visible: true
+    text: |
+      package tictactoe.coordinates;
+      
+      public class ValidateCoordinates {
+      
+          /**
+           * Validates the String provided to make sure it is valid coordinates. The length is checked
+           * first, then string is checked to make sure only numeric values are provided and finally
+           * the coordinates are parsed and checked to see if they are within the bounds of the game.
+           * @param coordinates
+           * @return
+           * @throws IllegalArgumentException
+           */
+          public static boolean isValidCoordinates(String coordinates) throws IllegalArgumentException{
+              String[] parts = coordinates.split(" ");
+      
+              // Is the correct length
+              if (!isCorrectLength(parts)) {
+                  throw new IllegalArgumentException("You should enter numbers!");
+              }
+      
+              // Check if the coordinates are numeric and parse them
+              int[] intCoordinates = new int[parts.length];
+              for (int i = 0; i < parts.length; i++) {
+                  if (!isNumeric(parts[i])) {
+                      throw new IllegalArgumentException("You should enter numbers!");
+                  } else {
+                      intCoordinates[i] = Integer.parseInt(parts[i]);
+                  }
+              }
+      
+              // Is within bounds of the table
+              if (!isWithinBounds(intCoordinates)) {
+                  throw new IllegalArgumentException("Coordinates should be from 1 to 3!");
+              }
+      
+              // Passes all validation
+              return true;
+          }
+      
+          /**
+           * Checks the table to see if there is a symbol at the chosen coordinates.
+           *
+           * @param coordinates The coordinates to check
+           * @param table The table to check
+           * @return True of it is occupied; false otherwise.
+           */
+          public static boolean isOccupied(int[] coordinates, char[][] table) {
+              char symbol = table[coordinates[0] - 1][coordinates[1] - 1]; // Minus one for zero index
+              return (symbol == 'X' || symbol == 'O');
+          }
+      
+          /**
+           * Checks that the initial input is the correct size.
+           *
+           * @param coordinates The coordinates to be checked
+           * @return True if they are the correct size; false otherwise.
+           */
+          private static boolean isCorrectLength(String[] coordinates) {
+              return coordinates.length == 2;
+          }
+      
+          /**
+           * Checks if a string is numeric
+           *
+           * @param string The string to be checked
+           * @return True if it is numeric; false otherwise.
+           */
+          private static boolean isNumeric(String string) {
+              try {
+                  Integer.parseInt(string);
+                  return true;
+              } catch (NumberFormatException e) {
+                  return false;
+              }
+          }
+      
+          /**
+           * Checks to ensure the coordinates are within bounds for the game.
+           *
+           * @param coordinates The coordinates to be checked.
+           * @return True if the coordinates are within bounds; false otherwise.
+           */
+          private static boolean isWithinBounds(int[] coordinates) {
+              return (coordinates[0] >= 1 && coordinates[0] <=3) && (coordinates[1] >=1 && coordinates[1] <=3);
+          }
+      
+      }
+    learner_created: true
+  - name: src/tictactoe/gameSettings/GameSettings.java
+    visible: true
+    text: |
+      package tictactoe.gameSettings;
+      
+      import tictactoe.io.input.UserInputManager;
+      
+      /**
+       * This class is responsible for prompting the user for game settings and validating them.
+       * It allows the user to either start a game or exit the application.
+       */
+      public class GameSettings {
+      
+          // INSTANCE VARIABLES
+          private String[] settings;
+          private boolean isExitCommand = false;
+      
+          // CONSTRUCTOR
+      
+          /**
+           * Constructor that initialises and prompts for game settings.
+           */
+          public GameSettings() {
+              initialiseGameSettings();
+          }
+      
+          // GETTERS AND SETTERS
+      
+          /**
+           * Returns the game settings that were provided by the user
+           *
+           * @return String Array of settings
+           */
+          public String[] getSettings() {
+              return this.settings;
+          }
+      
+          /**
+           * Returns whether the user chose to exit the game.
+           *
+           * @return true if the user chose to exit; false otherwise.
+           */
+          public boolean isExitCommand() {
+              return isExitCommand;
+          }
+      
+          /**
+           * Prompts the user to enter the game settings and validates the input.
+           * If the user inputs "exit", the game will exit.
+           * If the input is invalid, the user is prompted again until valid settings are provided.
+           */
+          public void initialiseGameSettings() {
+              boolean isValidSettings = false;
+      
+              while (!isValidSettings) {
+                  System.out.println("Input command: ");
+                  String userInput = UserInputManager.getUserInputString();
+      
+                  // Check if the user entered the exit command
+                  if (userInput.equalsIgnoreCase("exit")) {
+                      isExitCommand = true;
+                      settings = new String[0];
+                      return;
+                  }
+      
+                  // Validate and parse the settings
+                  if (ValidateGameSettings.isValidSettings(userInput)) {
+                      this.settings = parseSettings(userInput);
+                      isValidSettings = true;
+                  } else {
+                      System.out.println("Bad parameters!");
+                  }
+      
+              }
+          }
+      
+          /**
+           * Provides a string representation of the current game settings.
+           *
+           * @return A formatted string representing the game settings.
+           */
+          @Override
+          public String toString() {
+              StringBuilder currentSettings = new StringBuilder("The current setting are: ");
+              for (String setting : settings) {
+                  currentSettings.append(setting).append(" ");
+              }
+              return currentSettings.toString().trim();
+          }
+      
+          /**
+           * Parses the user's input and splits it into game settings
+           *
+           * @param userInput The user's input
+           * @return A String array of parsed game settings
+           */
+          private static String[] parseSettings(String userInput) {
+              return userInput.split(" ");
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/player/AnalysePlayerTurn.java
+    visible: true
+    text: |
+      package tictactoe.player;
+      
+      public class AnalysePlayerTurn {
+      
+          /**
+           * Takes in the current table and decides who's turn it is based on the amount of symbols
+           * placed by each player.
+           *
+           * @param table   The table to be analysed
+           * @return Return the player with the next turn.
+           */
+          public static Player analysePlayerTurn(char[][] table, Player playerX, Player playerO) {
+              int playerXCount = 0;
+              int playerOCount = 0;
+      
+              for (int row = 0; row < table.length; row++) {
+                  for (int col = 0; col < table[row].length; col++) {
+                      if (table[row][col] == playerX.getSymbol()) {
+                          playerXCount++;
+                      } else if (table[row][col] == playerO.getSymbol()) {
+                          playerOCount++;
+                      }
+                  }
+              }
+      
+              return (playerXCount <= playerOCount) ? playerX: playerO;
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/player/PlayerType.java
+    visible: true
+    text: |
+      package tictactoe.player;
+      
+      public enum PlayerType {
+          USER, COMPUTER;
+      }
+    learner_created: true
+  - name: src/tictactoe/menu/MainMenu.java
+    visible: true
+    text: |
+      package tictactoe.menu;
+      
+      public class MainMenu implements Menu {
+          @Override
+          public void run() {
+              boolean running = true;
+              while (running) {
+      
+              }
+          }
+      }
+    learner_created: true
+  - name: src/tictactoe/gameSettings/Command.java
+    visible: true
+    text: |
+      package tictactoe.gameSettings;
+      
+      public enum Command {
+          START, EXIT;
+      }
+    learner_created: true
+  - name: src/tictactoe/io/input/UserInputManager.java
+    visible: true
+    text: |
+      package tictactoe.io.input;
+      
+      import java.util.Scanner;
+      
+      public class UserInputManager {
+          private static final Scanner SCANNER = new Scanner(System.in);
+      
+          /**
+           * Returns the user input as a string.
+           *
+           * @return The user's input as a string.
+           */
+          public static String getUserInputString() {
+              return SCANNER.nextLine();
+          }
+      
+      
+      
+      }
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7437#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 12 Sep 2024 14:02:51 UTC"
 record: -1
